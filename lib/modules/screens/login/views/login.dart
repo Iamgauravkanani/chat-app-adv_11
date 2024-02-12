@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:chat_app_11/modules/screens/login/controllers/login_controller.dart';
 import 'package:chat_app_11/modules/utils/constants/colors.dart';
-import 'package:chat_app_11/modules/utils/helpers/auth_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +19,14 @@ class Login extends StatelessWidget {
       backgroundColor: white,
       appBar: AppBar(
         backgroundColor: white,
-        title: const Text("Login"),
+        title: Text(
+          "Login",
+          style: GoogleFonts.poppins(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+          ),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -58,7 +62,7 @@ class Login extends StatelessWidget {
                 height: 20,
               ),
               ElevatedButton(
-                style: myButtonStyle(bg_color: Colors.blue),
+                style: myButtonStyle(bg_color: Colors.black),
                 onPressed: aninymous,
                 child: Text(
                   "Sign in Anonymously",
@@ -72,7 +76,7 @@ class Login extends StatelessWidget {
                 height: 20,
               ),
               ElevatedButton(
-                style: myButtonStyle(bg_color: Colors.grey),
+                style: myButtonStyle(bg_color: grey),
                 onPressed: signup,
                 child: Text(
                   "Sign Up",
@@ -87,35 +91,6 @@ class Login extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  login() async {
-    Map<String, dynamic> res = await AuthHelper.authHelper.signIn();
-    if (res['error'] != null) {
-      log("login failed");
-    } else {
-      log("login sucess");
-    }
-  }
-
-  //todo:Sign up User
-  signup() async {
-    Map<String, dynamic> res = await AuthHelper.authHelper.signUp();
-    if (res['error'] != null) {
-      log("signup failed");
-    } else {
-      log("signup sucess");
-    }
-  }
-
-  //todo:login button click
-  aninymous() async {
-    Map<String, dynamic> res = await AuthHelper.authHelper.signInAninyymous();
-    if (res['error'] != null) {
-      log("login failed");
-    } else {
-      log("login sucess");
-    }
   }
 
   //todo:email field

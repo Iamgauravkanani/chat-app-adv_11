@@ -16,9 +16,6 @@ myButtonStyle({Color bg_color = Colors.orange}) {
   );
 }
 
-//todo:login button click
-login() {}
-
 //todo:outline border
 OutlineInputBorder outlineInputBorder() => const OutlineInputBorder(
       borderSide: BorderSide(color: Colors.black),

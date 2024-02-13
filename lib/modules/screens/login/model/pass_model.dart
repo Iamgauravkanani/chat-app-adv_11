@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 class Password {
   bool isVisible;
 

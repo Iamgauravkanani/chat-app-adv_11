@@ -1,17 +1,16 @@
+// ignore_for_file: non_constant_identifier_names
 import 'package:chat_app_11/modules/screens/login/controllers/login_controller.dart';
 import 'package:chat_app_11/modules/utils/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../utils/constants/strings.dart';
 import 'components/components.dart';
 
+// ignore: must_be_immutable
 class Login extends StatelessWidget {
   Login({super.key});
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String? email;
-  String? password;
+
   LoginController controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
@@ -21,10 +20,9 @@ class Login extends StatelessWidget {
         backgroundColor: white,
         title: Text(
           "Login",
-          style: GoogleFonts.poppins(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
+          style: poppinsStyle(
             fontSize: 25,
+            fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
@@ -37,12 +35,13 @@ class Login extends StatelessWidget {
             children: [
               Image.network(
                   "https://i.pinimg.com/originals/4e/79/b7/4e79b7a983c01df927b8d0f42e799b35.gif"),
-              emailTextField(),
+              emailTextField(textEditingController: emailController),
               const SizedBox(
                 height: 20,
               ),
               GetBuilder<LoginController>(
-                builder: (_) => passwordTextField(),
+                builder: (_) => passwordTextField(
+                    textEditingController: passwordController),
               ),
               const SizedBox(
                 height: 20,
@@ -52,10 +51,7 @@ class Login extends StatelessWidget {
                 onPressed: login,
                 child: Text(
                   "Login",
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
+                  style: poppinsStyle(),
                 ),
               ),
               const SizedBox(
@@ -66,10 +62,7 @@ class Login extends StatelessWidget {
                 onPressed: aninymous,
                 child: Text(
                   "Sign in Anonymously",
-                  style: GoogleFonts.lato(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
+                  style: latoStyle(color: white),
                 ),
               ),
               const SizedBox(
@@ -78,13 +71,7 @@ class Login extends StatelessWidget {
               ElevatedButton(
                 style: myButtonStyle(bg_color: grey),
                 onPressed: signup,
-                child: Text(
-                  "Sign Up",
-                  style: GoogleFonts.lato(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
+                child: Text("Sign Up", style: latoStyle(color: white)),
               ),
             ],
           ),
@@ -93,25 +80,33 @@ class Login extends StatelessWidget {
     );
   }
 
-  //todo:email field
-  emailTextField() => TextFormField(
-        controller: emailController,
-        onChanged: (val) {
-          email = val;
-        },
-        decoration: InputDecoration(
-          border: outlineInputBorder(),
-          focusedBorder: outlineInputBorder(),
-          hintText: "enter email...",
-          labelText: 'Email',
-          labelStyle: textStyle(),
+//todo:Sign up User
+  signup() {
+    Get.defaultDialog(
+        backgroundColor: white,
+        title: "Chatters Hub",
+        titleStyle: latoStyle(fontSize: 22),
+        content: Column(
+          children: [
+            emailTextField(textEditingController: s_emailController),
+            const SizedBox(
+              height: 20,
+            ),
+            passwordTextField(textEditingController: s_passwordController),
+          ],
         ),
-      );
+        confirm: ElevatedButton(
+          style: myButtonStyle(),
+          onPressed: onRegister,
+          child: Text("Register", style: latoStyle(color: white)),
+        ));
+  }
 
-//todo: password field
-  passwordTextField() => TextFormField(
+  //todo: password field
+  passwordTextField({required TextEditingController textEditingController}) =>
+      TextFormField(
         obscureText: controller.password.isVisible,
-        controller: passwordController,
+        controller: textEditingController,
         onChanged: (val) {
           password = val;
         },

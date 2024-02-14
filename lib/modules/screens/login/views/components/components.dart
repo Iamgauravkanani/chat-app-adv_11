@@ -7,6 +7,17 @@ import '../../../../utils/constants/strings.dart';
 import '../../../../utils/helpers/auth_helper.dart';
 import '../../model/login_model.dart';
 
+//todo:on Google signin
+onGoogleSignin() async {
+  Map<String, dynamic> res = await AuthHelper.authHelper.googleSignin();
+  if (res['error'] != null) {
+    Fluttertoast.showToast(msg: "Login failed", textColor: Colors.red);
+  } else {
+    Get.offAndToNamed('/home');
+    Fluttertoast.showToast(msg: "Login Success", textColor: Colors.black);
+  }
+}
+
 //todo:email field
 emailTextField({required TextEditingController textEditingController}) =>
     TextFormField(
@@ -49,7 +60,7 @@ login() async {
   } else {
     emailController.clear();
     passwordController.clear();
-    Get.back();
+    Get.offAndToNamed('/home');
     Fluttertoast.showToast(msg: "Login Success", textColor: Colors.black);
   }
 }
@@ -58,7 +69,7 @@ login() async {
 aninymous() async {
   Map<String, dynamic> res = await AuthHelper.authHelper.signInAninyymous();
   if (res['error'] != null) {
-    log("login failed");
+    Get.offAndToNamed('/home');
   } else {
     log("login success");
   }

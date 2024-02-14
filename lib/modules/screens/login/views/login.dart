@@ -73,6 +73,15 @@ class Login extends StatelessWidget {
                 onPressed: signup,
                 child: Text("Sign Up", style: latoStyle(color: white)),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                style: myButtonStyle(bg_color: Colors.blueAccent),
+                onPressed: onGoogleSignin,
+                child:
+                    Text("Sign in With Google", style: latoStyle(color: white)),
+              ),
             ],
           ),
         ),

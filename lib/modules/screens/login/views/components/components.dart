@@ -43,8 +43,8 @@ onRegister() async {
   if (res['error'] != null) {
     Fluttertoast.showToast(msg: "Sign up failed", textColor: Colors.red);
   } else {
-    s_emailController.clear();
-    s_passwordController.clear();
+    sEmailController.clear();
+    sPasswordController.clear();
     Fluttertoast.showToast(msg: "Sign up Success", textColor: Colors.black);
   }
 }

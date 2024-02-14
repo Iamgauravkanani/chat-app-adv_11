@@ -1,3 +1,4 @@
+import 'package:chat_app_11/modules/utils/constants/strings.dart';
 import 'package:chat_app_11/modules/utils/helpers/auth_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,21 +19,17 @@ class Home extends StatelessWidget {
             ),
             CircleAvatar(
               radius: 80,
-              foregroundImage:
-                  NetworkImage("${AuthHelper.auth.currentUser?.photoURL}"),
+              foregroundImage: NetworkImage(userProfile),
             ),
           ],
         ),
       ),
       appBar: AppBar(
-        title: (AuthHelper.auth.currentUser?.displayName == null)
+        title: (displayName == null)
             ? Text(
-                "${AuthHelper.auth.currentUser?.email?.split("@")[0].capitalizeFirst}",
+                userName,
               )
-            : Text(
-                //"${AuthHelper.auth.currentUser?.email?.split("@")[0].capitalizeFirst}",
-                "${AuthHelper.auth.currentUser?.displayName}",
-              ),
+            : Text(displayName),
         centerTitle: true,
         actions: [
           IconButton(onPressed: logout, icon: Icon(CupertinoIcons.arrow_up_bin))

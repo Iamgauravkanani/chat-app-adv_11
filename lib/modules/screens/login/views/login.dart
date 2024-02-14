@@ -97,11 +97,11 @@ class Login extends StatelessWidget {
         titleStyle: latoStyle(fontSize: 22),
         content: Column(
           children: [
-            emailTextField(textEditingController: s_emailController),
+            emailTextField(textEditingController: sEmailController),
             const SizedBox(
               height: 20,
             ),
-            passwordTextField(textEditingController: s_passwordController),
+            passwordTextField(textEditingController: sPasswordController),
           ],
         ),
         confirm: ElevatedButton(

@@ -10,9 +10,8 @@ TextEditingController sPasswordController = TextEditingController();
 String? email;
 String? password;
 
-//todo:homescreen strings
-String userName =
-    "${AuthHelper.auth.currentUser?.email?.split("@")[0].capitalizeFirst}";
-String userEmail = "${AuthHelper.auth.currentUser?.email}";
-String userProfile = "${AuthHelper.auth.currentUser?.photoURL}";
-String displayName = "${AuthHelper.auth.currentUser?.displayName}";
+String profileImageDefault =
+    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png";
+
+TextEditingController messageController = TextEditingController();
+String? message;

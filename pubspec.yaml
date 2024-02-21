@@ -41,6 +41,7 @@ dependencies:
   google_fonts:
   fluttertoast:
   google_sign_in:
+  cloud_firestore:   
 
 dev_dependencies:
   flutter_test:

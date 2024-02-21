@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:chat_app_11/modules/utils/helpers/cloudfirestore_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -13,8 +14,9 @@ onGoogleSignin() async {
   if (res['error'] != null) {
     Fluttertoast.showToast(msg: "Login failed", textColor: Colors.red);
   } else {
-    Get.offAndToNamed('/home');
+    Get.toNamed('/home');
     Fluttertoast.showToast(msg: "Login Success", textColor: Colors.black);
+    CloudFireStoreHelper.fireStoreHelper.addUser();
   }
 }
 
@@ -60,8 +62,9 @@ login() async {
   } else {
     emailController.clear();
     passwordController.clear();
-    Get.offAndToNamed('/home');
+    Get.toNamed('/home');
     Fluttertoast.showToast(msg: "Login Success", textColor: Colors.black);
+    CloudFireStoreHelper.fireStoreHelper.addUser();
   }
 }
 

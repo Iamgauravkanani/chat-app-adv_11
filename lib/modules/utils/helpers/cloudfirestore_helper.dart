@@ -34,15 +34,48 @@ class CloudFireStoreHelper {
         .snapshots();
   }
 
-  sendMessage({required Chat chatdetails}) async {
-    await firestore
-        .collection("chat")
-        .doc("${chatdetails.sender}_${chatdetails.receiver}")
-        .set({
-      "sentby": chatdetails.sender,
-      "receivedby": chatdetails.receiver,
-      "message": chatdetails.message,
-      "timeStamp": FieldValue.serverTimestamp(),
-    });
+  Future<void> sendMessage({required Chat chatdetails}) async {
+    //todo:my current user
+    String u1 = chatdetails.sender;
+    String u2 = chatdetails.receiver;
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await firestore.collection('chat').get();
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> fetchedChatID =
+        querySnapshot.docs;
+    bool isChatRoomAvailable = false;
+    String fetchedUser1 = '';
+    String fetchedUser2 = '';
+    for (QueryDocumentSnapshot element in fetchedChatID) {
+      String user1 = element.id.split('_')[0];
+      String user2 = element.id.split('_')[1];
+      if ((user1 == u1 || user1 == u2) && (user2 == u1 || user2 == u2)) {
+        isChatRoomAvailable = true;
+        fetchedUser1 = element.id.split('_')[0];
+        fetchedUser2 = element.id.split('_')[1];
+      }
+    }
+    if (isChatRoomAvailable) {
+      await firestore
+          .collection('chat')
+          .doc('${fetchedUser1}_${fetchedUser2}')
+          .collection('message')
+          .add({
+        "sentby": chatdetails.sender,
+        "receivedby": chatdetails.receiver,
+        "message": chatdetails.message,
+        "timestamp": FieldValue.serverTimestamp(),
+      });
+    } else {
+      await firestore
+          .collection("chat")
+          .doc("${chatdetails.sender}_${chatdetails.receiver}")
+          .collection("message")
+          .add({
+        "sentby": chatdetails.sender,
+        "receivedby": chatdetails.receiver,
+        "message": chatdetails.message,
+        "timestamp": FieldValue.serverTimestamp(),
+      });
+    }
   }
 }

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../helpers/auth_helper.dart';
 
 //todo:login screen strings
 TextEditingController emailController = TextEditingController();

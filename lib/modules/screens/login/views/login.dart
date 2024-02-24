@@ -3,21 +3,13 @@ import 'package:chat_app_11/modules/screens/login/controllers/login_controller.d
 import 'package:chat_app_11/modules/utils/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import '../../../utils/constants/strings.dart';
-
 import 'components/components.dart';
 
 // ignore: must_be_immutable
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
   LoginController controller = Get.put(LoginController());
 
   @override

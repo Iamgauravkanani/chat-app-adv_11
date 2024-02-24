@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
+import 'modules/screens/chat/model/chat_model.dart';
 import 'modules/screens/login/views/login.dart';
 
 void main() async {
@@ -18,7 +19,7 @@ void main() async {
       getPages: [
         GetPage(name: '/', page: () => Login()),
         GetPage(name: '/home', page: () => Home()),
-        GetPage(name: '/chat', page: () => Chat()),
+        GetPage(name: '/chat', page: () => ChatScreen()),
       ],
     ),
   );

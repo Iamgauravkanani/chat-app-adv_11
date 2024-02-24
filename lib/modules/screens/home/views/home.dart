@@ -41,11 +41,18 @@ class Home extends StatelessWidget {
             List<QueryDocumentSnapshot<Map<String, dynamic>>>? users =
                 snapshot.data?.docs;
             return ListView.builder(
+                shrinkWrap: true,
                 itemCount: users?.length,
                 itemBuilder: (ctx, i) {
                   return Card(
                     child: ListTile(
-                      onTap: onUserTap,
+                      onTap: () {
+                        Get.toNamed('/chat', arguments: [
+                          "${users?[i]['name']}",
+                          "${users?[i]['profile_picture']}",
+                          "${users?[i]['uid']}",
+                        ]);
+                      },
                       title: Text("${users?[i]['name']}"),
                       subtitle: Text("${users?[i]['email']}"),
                       leading: CircleAvatar(
@@ -65,7 +72,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  onUserTap() {
-    Get.toNamed('/chat');
-  }
+  // onUserTap(QueryDocumentSnapshot<Map<String, dynamic>>? users) {
+  //   Get.toNamed('/chat');
+  // }
 }

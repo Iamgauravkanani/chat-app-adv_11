@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/strings.dart';
 import '../../../utils/helpers/auth_helper.dart';
@@ -25,10 +27,36 @@ class ChatScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
+              child: StreamBuilder(
+            stream: fetchedmsg,
+            builder: (ctx, snapshot) {
+              if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              } else if (snapshot.hasData) {
+                List<QueryDocumentSnapshot<Map<String, dynamic>>>? messages =
+                    snapshot.data?.docs;
+
+                return ListView.builder(
+                    reverse: true,
+                    itemCount: messages?.length,
+                    itemBuilder: (ctx, i) {
+                      return Align(
+                        alignment: (arguments[2] != messages?[i]['receivedby'])
+                            ? Alignment.centerLeft
+                            : Alignment.centerRight,
+                        child: Chip(
+                          label: Text("${messages?[i]['message']}"),
+                        ),
+                      );
+                    });
+              }
+              return Lottie.asset(
+                'lottie_json/Animation - 1699090891956.json',
+                width: 400,
+                height: 400,
+              );
+            },
+          )),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: chatTextField(receiver: arguments[2]),

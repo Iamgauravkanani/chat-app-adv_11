@@ -1,3 +1,4 @@
+import 'package:chat_app_11/modules/utils/constants/strings.dart';
 import 'package:chat_app_11/modules/utils/helpers/cloudfirestore_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../../utils/helpers/auth_helper.dart';
+import '../../chat/model/chat_model.dart';
 import 'components/home_components.dart';
 
 class Home extends StatelessWidget {
@@ -46,7 +48,14 @@ class Home extends StatelessWidget {
                 itemBuilder: (ctx, i) {
                   return Card(
                     child: ListTile(
-                      onTap: () {
+                      onTap: () async {
+                        Chat chat = Chat(
+                          message: '',
+                          receiver: "${users?[i]['uid']}",
+                          sender: "${AuthHelper.auth.currentUser?.uid}",
+                        );
+                        fetchedmsg = await CloudFireStoreHelper.fireStoreHelper
+                            .fetchMessage(chatdetails: chat);
                         Get.toNamed('/chat', arguments: [
                           "${users?[i]['name']}",
                           "${users?[i]['profile_picture']}",
@@ -71,8 +80,4 @@ class Home extends StatelessWidget {
       ),
     );
   }
-
-  // onUserTap(QueryDocumentSnapshot<Map<String, dynamic>>? users) {
-  //   Get.toNamed('/chat');
-  // }
 }

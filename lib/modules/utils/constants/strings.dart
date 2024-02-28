@@ -13,3 +13,4 @@ String profileImageDefault =
 
 TextEditingController messageController = TextEditingController();
 String? message;
+Stream? fetchedmsg;

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../utils/helpers/auth_helper.dart';
 import '../../chat/model/chat_model.dart';
 import 'components/home_components.dart';
@@ -73,8 +74,85 @@ class Home extends StatelessWidget {
                   );
                 });
           }
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.white,
+            child: const Column(
+              children: [
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(""),
+                    subtitle: Text(""),
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
